@@ -24,6 +24,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
 Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'terryma/vim-expand-region'
 
 filetype plugin indent on    " required!
 
@@ -142,6 +144,9 @@ let NERDTreeHighlightCursorline = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 map <F3> <plug>NERDTreeTabsToggle<CR>
+""""""""""""""""""""""""""""""
+" vim-multiple-cursors setting
+""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " Syntastic setting
