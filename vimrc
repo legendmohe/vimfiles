@@ -8,7 +8,7 @@ if has('win32') || has('win64')
   call vundle#rc('$HOME/vimfiles/bundle/')
 else
   " Usual quickstart instructions
-  set rtp+=~/.vim/bundle/vundle/
+  set rtp+=~/.vim/vundle/
   call vundle#rc()
 endif
 
@@ -46,13 +46,21 @@ set ruler
 "set autochdir
 set number
 "filetype plugin on "允许插件
-"set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
 "set hlsearch
 set incsearch
 set nobackup
 set noshowmode
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
+
+"Font
+if has('win32') || has('win64')
+    set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
+else
+    set guifont=Monaco:h13 
+endif
+"
+"colo
 set t_Co=256
 syntax enable
 set background=light
@@ -60,6 +68,7 @@ if has('gui_running')
     set background=light
 else
     set background=dark
+    let g:solarized_termtrans = 1
 endif
 let g:solarized_termcolors=256
 colorscheme solarized
@@ -189,7 +198,7 @@ let g:airline_theme="bubblegum"
 if has('win32') || has('win64')
     source $VIMRUNTIME/mswin.vim 
     behave mswin
-else
+endif
 
 " insert word of the line above
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
