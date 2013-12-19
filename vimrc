@@ -3,8 +3,14 @@
 """"""""""""""""""""""""""""""
 filetype off        " required!
 
-set rtp+=$HOME/vimfiles/vundle  "记得改！
-call vundle#rc('$HOME/vimfiles/bundle/')
+if has('win32') || has('win64')
+  set rtp+=$HOME/vimfiles/vundle/
+  call vundle#rc('$HOME/vimfiles/bundle/')
+else
+  " Usual quickstart instructions
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+endif
 
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
@@ -174,9 +180,10 @@ let g:airline_theme="bubblegum"
 """"""""""""""""""""""""""""""
 " others setting
 """"""""""""""""""""""""""""""
-
-source $VIMRUNTIME/mswin.vim 
-behave mswin
+if has('win32') || has('win64')
+    source $VIMRUNTIME/mswin.vim 
+    behave mswin
+else
 
 " insert word of the line above
 inoremap <C-Y> <C-C>:let @z = @"<CR>mz
