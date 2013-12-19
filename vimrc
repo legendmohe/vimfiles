@@ -59,8 +59,8 @@ inoremap <ESC> <ESC>:set iminsert=2<CR>
 "switch buffer
 map <F1> :bp!<cr>
 map <F2> :bn!<cr>
-nnoremap <F10>  :tabnext<CR>
-nnoremap <F9>  :tabprev<CR>
+nnoremap <leader>=  :tabnext<CR>
+nnoremap <leader>-  :tabprev<CR>
 
 "搜索时把当前结果置于屏幕中央并打开折叠
 nnoremap n nzzzv
