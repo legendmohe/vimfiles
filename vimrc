@@ -12,13 +12,18 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/TaskList.vim'
 Bundle 'Shougo/neocomplcache.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
+Bundle 'SirVer/ultisnips'
+Bundle 'mhinz/vim-startify'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'yonchu/accelerated-smooth-scroll'
+Bundle 'Shougo/vimproc.vim'
+Bundle 'Shougo/vimshell.vim'
 
 filetype plugin indent on    " required!
 
@@ -30,9 +35,9 @@ set nocompatible
 set smartindent
 set ignorecase smartcase
 set ruler
-set autochdir
+"set autochdir
 set number
-filetype plugin on "允许插件
+"filetype plugin on "允许插件
 set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
 set hlsearch
 set incsearch
@@ -40,6 +45,10 @@ set incsearch
 "switch buffer
 nnoremap <F1> :bp<cr>
 nnoremap <F2> :bn<cr>
+
+"搜索时把当前结果置于屏幕中央并打开折叠
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 "map ESC with jj
 imap jj <ESC>
@@ -76,7 +85,7 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 " Tagbar setting
 """"""""""""""""""""""""""""""
 
-nmap <F8> :TagbarToggle<CR>
+nmap <F4> :TagbarToggle<CR>
 
 """"""""""""""""""""""""""""""
 " neocomplcache setting
@@ -89,15 +98,14 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 2
-
-let g:neocomplcache_enable_auto_select = 1
+" AutoComplPop like behavior.
+"let g:neocomplcache_enable_auto_select = 1
 
 inoremap <expr><space>  pumvisible() ? neocomplcache#close_popup() . "\<SPACE>" : "\<SPACE>"
 
 """"""""""""""""""""""""""""""
 " python setting
 """"""""""""""""""""""""""""""
-set filetype=python
 au BufNewFile,BufRead *.py,*.pyw setf python
 set smartindent " next level indent
 set expandtab
@@ -141,15 +149,6 @@ let g:syntastic_check_on_open=1
 map <leader>td <Plug>TaskList
 
 """"""""""""""""""""""""""""""
-" bufferline setting
-""""""""""""""""""""""""""""""
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-
-
-""""""""""""""""""""""""""""""
 " ctags setting
 """"""""""""""""""""""""""""""
 
@@ -162,17 +161,18 @@ set laststatus=2
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme="bubblegum"
 
-"/*-----------------------------c++IDE------------------------------*/
-
-if(has("win32") || has("win95") || has("win64") || has("win16"))
-    let g:vimrc_iswindows=1
-else
-    let g:vimrc_iswindows=0
-endif
-
+""""""""""""""""""""""""""""""
+" others setting
+""""""""""""""""""""""""""""""
 
 source $VIMRUNTIME/mswin.vim 
-behave mswin 
+behave mswin
+
+" insert word of the line above
+inoremap <C-Y> <C-C>:let @z = @"<CR>mz
+           \:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
+           \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
+           \`zp:let @" = @z<CR>a
 
 set diffexpr=MyDiff()
 function MyDiff()
