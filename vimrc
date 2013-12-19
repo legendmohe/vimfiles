@@ -46,7 +46,7 @@ set ruler
 "set autochdir
 set number
 "filetype plugin on "允许插件
-set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
+"set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
 "set hlsearch
 set incsearch
 set nobackup
@@ -55,7 +55,13 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
 set t_Co=256
 syntax enable
-set background=dark
+set background=light
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+let g:solarized_termcolors=256
 colorscheme solarized
 
 "Set mapleader
