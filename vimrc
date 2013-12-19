@@ -21,9 +21,9 @@ Bundle 'tpope/vim-repeat'
 Bundle 'SirVer/ultisnips'
 Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'yonchu/accelerated-smooth-scroll'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
+Bundle 'jistr/vim-nerdtree-tabs'
 
 filetype plugin indent on    " required!
 
@@ -39,12 +39,28 @@ set ruler
 set number
 "filetype plugin on "允许插件
 set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
-set hlsearch
+"set hlsearch
 set incsearch
+set nobackup
+set noshowmode
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set go=
+set t_Co=256
+syntax enable
+set background=dark
+colorscheme solarized
+
+"Set mapleader
+let mapleader = ","
+
+set imactivatekey=C-space
+inoremap <ESC> <ESC>:set iminsert=2<CR>
 
 "switch buffer
-nnoremap <F1> :bp<cr>
-nnoremap <F2> :bn<cr>
+map <F1> :bp!<cr>
+map <F2> :bn!<cr>
+nnoremap <F10>  :tabnext<CR>
+nnoremap <F9>  :tabprev<CR>
 
 "搜索时把当前结果置于屏幕中央并打开折叠
 nnoremap n nzzzv
@@ -52,24 +68,6 @@ nnoremap N Nzzzv
 
 "map ESC with jj
 imap jj <ESC>
-
-set nobackup
-set noshowmode
-
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set go=
-
-
-set t_Co=256
-syntax enable
-set background=dark
-colorscheme solarized
-
-set imactivatekey=C-space
-inoremap <ESC> <ESC>:set iminsert=2<CR>
-
-"Set mapleader
-let mapleader = ","
 
 "Fast reloading of the .vimrc
 nmap <silent> <leader>ss :source $MYVIMRC<cr>
@@ -81,6 +79,11 @@ autocmd BufEnter * silent! lcd %:p:h
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
+nmap <silent> <leader>h :CtrlPMRU<cr>
+
+:hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+:hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+:nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 """"""""""""""""""""""""""""""
 " Tagbar setting
 """"""""""""""""""""""""""""""
@@ -93,7 +96,7 @@ nmap <F4> :TagbarToggle<CR>
 
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 0
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
@@ -135,8 +138,10 @@ map <F6> :!start ruby %<CR>
 let NERDTreeChDirMode=2
 let NERDTreeWinPos="right"
 let NERDTreeShowBookmarks=1
-map <F3> :NERDTreeMirror .\<CR>
-map <F3> :NERDTreeToggle .\<CR>
+let NERDTreeHighlightCursorline = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
+map <F3> <plug>NERDTreeTabsToggle<CR>
 
 """"""""""""""""""""""""""""""
 " Syntastic setting
@@ -158,7 +163,7 @@ set tags+=tags;
 " airline setting
 """"""""""""""""""""""""""""""
 set laststatus=2
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme="bubblegum"
 
 """"""""""""""""""""""""""""""
