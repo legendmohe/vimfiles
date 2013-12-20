@@ -36,6 +36,7 @@ Bundle 'YankRing.vim'
 Bundle 'EasyGrep'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'hallison/vim-markdown'
 
 filetype plugin indent on    " required!
 
@@ -66,6 +67,7 @@ inoremap <ESC> <ESC>:set iminsert=2<CR>
 "switch buffer
 map <F1> :bp!<cr>
 map <F2> :bn!<cr>
+"switch tabs
 nnoremap <leader>=  :tabnext<CR>
 nnoremap <leader>-  :tabprev<CR>
 
@@ -137,7 +139,7 @@ nnoremap <Leader>a <Plug>(EasyAlign)
 
 let g:acp_enableAtStartup             = 0
 " Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 0
+let g:neocomplcache_enable_at_startup = 0 "最好关闭，要不提示太频繁
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
@@ -161,9 +163,6 @@ set foldmethod=indent " fold
 set foldlevel=99
 
 let python_space_error_highlight=1
-
-"Pydiction
-let g:pydiction_location = 'd:\Program Files (x86)\Vim\vimfiles\ftplugin\pydiction\complete-dict'
 
 map <F5> <Esc>:w<CR>:! python %<CR>
 
@@ -207,9 +206,9 @@ set tags+=tags;
 " airline setting
 """"""""""""""""""""""""""""""
 set laststatus=2
-let g:airline_detect_whitespace=0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme="bubblegum"
+let g:airline_detect_whitespace          = 0 "关闭空白符检测
+let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
+let g:airline_theme                      = "bubblegum" "设定主题
 
 """"""""""""""""""""""""""""""
 " others setting
@@ -224,6 +223,10 @@ inoremap <C-Y> <C-C>:let @z = @"<CR>mz
            \:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
            \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
            \`zp:let @" = @z<CR>a
+
+""""""""""""""""""""""""""""""
+" defult
+""""""""""""""""""""""""""""""
 
 set diffexpr=MyDiff()
 function! MyDiff()
