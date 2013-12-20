@@ -32,7 +32,7 @@ Bundle 'Shougo/vimshell.vim'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
 Bundle 'EasyGrep'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
@@ -139,7 +139,7 @@ nnoremap <Leader>a <Plug>(EasyAlign)
 
 let g:acp_enableAtStartup             = 0
 " Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 0 "最好关闭，要不提示太频繁
+let g:neocomplcache_enable_at_startup = 1 "最好关闭，要不提示太频繁
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
