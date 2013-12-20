@@ -12,6 +12,7 @@ else
   call vundle#rc()
 endif
 
+Bundle 'Shougo/vimproc.vim'
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
 Bundle 'scrooloose/nerdtree'
@@ -27,11 +28,13 @@ Bundle 'tpope/vim-repeat'
 Bundle 'SirVer/ultisnips'
 Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
+Bundle 'YankRing.vim'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'junegunn/vim-easy-align'
 
 filetype plugin indent on    " required!
 
@@ -43,7 +46,7 @@ set nocompatible
 set smartindent
 set ignorecase smartcase
 set ruler
-"set autochdir
+" set autochdir
 set number
 "filetype plugin on "允许插件
 "set hlsearch
@@ -52,26 +55,6 @@ set nobackup
 set noshowmode
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
-
-"Font
-if has('win32') || has('win64')
-    set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
-else
-    set guifont=Monaco:h13 
-endif
-"
-"colo
-set t_Co=256
-syntax enable
-set background=light
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-    let g:solarized_termtrans = 1
-endif
-let g:solarized_termcolors=256
-colorscheme solarized
 
 "Set mapleader
 let mapleader = ","
@@ -102,22 +85,56 @@ autocmd BufEnter * silent! lcd %:p:h
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
-nmap <silent> <leader>h :CtrlPMRU<cr>
+""""""""""""""""""""""""""""""
+" color and fonts setting
+""""""""""""""""""""""""""""""
+"Font
+if has('win32') || has('win64')
+    set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
+else
+    set guifont=Monaco:h12 
+endif
+"
+"colo
+set t_Co=256
+syntax enable
+if has('gui_running')
+    set background=dark
+else
+    set background=dark
+    let g:solarized_termtrans = 1
+endif
+let g:solarized_termcolors=256
+colorscheme solarized
 
-:hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-:hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-:nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 """"""""""""""""""""""""""""""
 " Tagbar setting
 """"""""""""""""""""""""""""""
-
 nmap <F4> :TagbarToggle<CR>
+
+""""""""""""""""""""""""""""""
+" Ctrlp setting
+""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>h :CtrlPMRU<cr>
+nnoremap <silent> <leader>p :CtrlP<cr>
+
+""""""""""""""""""""""""""""""
+" YandRing setting
+""""""""""""""""""""""""""""""
+nnoremap <silent> <F9> :YRShow<CR>
+
+""""""""""""""""""""""""""""""
+" easy-align setting
+""""""""""""""""""""""""""""""
+" vip<Enter>=
+vmap <Enter> <Plug>(EasyAlign)
+nnoremap <Leader>a <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""
 " neocomplcache setting
 """"""""""""""""""""""""""""""
 
-let g:acp_enableAtStartup = 0
+let g:acp_enableAtStartup             = 0
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 0
 " Use smartcase.
@@ -153,7 +170,7 @@ map <F5> <Esc>:w<CR>:! python %<CR>
 " Ruby setting
 """"""""""""""""""""""""""""""
 
-map <F6> :!start ruby %<CR>
+map <F6> <Esc>:w<CR>:! ruby %<CR>
 
 """"""""""""""""""""""""""""""
 " NerdTree setting
@@ -189,6 +206,7 @@ set tags+=tags;
 " airline setting
 """"""""""""""""""""""""""""""
 set laststatus=2
+let g:airline_detect_whitespace=0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme="bubblegum"
 
@@ -207,7 +225,7 @@ inoremap <C-Y> <C-C>:let @z = @"<CR>mz
            \`zp:let @" = @z<CR>a
 
 set diffexpr=MyDiff()
-function MyDiff()
+function! MyDiff()
   let opt = '-a --binary '
   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
