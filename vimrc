@@ -33,6 +33,7 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
 Bundle 'YankRing.vim'
+Bundle 'EasyGrep'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 
@@ -98,14 +99,14 @@ endif
 "colo
 set t_Co=256
 syntax enable
-if has('gui_running')
-    set background=dark
-else
-    set background=dark
-    let g:solarized_termtrans = 1
-endif
-let g:solarized_termcolors=256
-colorscheme solarized
+" if has('gui_running')
+"     set background=dark
+" else
+"     set background=dark
+"     let g:solarized_termtrans = 1
+" endif
+" let g:solarized_termcolors=256
+ colorscheme desert
 
 """"""""""""""""""""""""""""""
 " Tagbar setting
