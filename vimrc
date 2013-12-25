@@ -20,7 +20,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/TaskList.vim'
-Bundle 'Shougo/neocomplcache.vim'
+"Bundle 'Shougo/neocomplcache.vim'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
@@ -36,14 +37,16 @@ Bundle 'terryma/vim-expand-region'
 Bundle 'EasyGrep'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
-Bundle 'hallison/vim-markdown'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'legendmohe/conque_2.3_fix'
 
 filetype plugin indent on    " required!
 
 """"""""""""""""""""""""""""""
 " common setting
 """"""""""""""""""""""""""""""
-
+set ff=unix
 set nocompatible
 set smartindent
 set ignorecase smartcase
@@ -101,14 +104,14 @@ endif
 "colo
 set t_Co=256
 syntax enable
-" if has('gui_running')
-"     set background=dark
-" else
-"     set background=dark
-"     let g:solarized_termtrans = 1
-" endif
-" let g:solarized_termcolors=256
- colorscheme desert
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+    let g:solarized_termtrans = 1
+endif
+let g:solarized_termcolors=256
+colorscheme solarized
 
 """"""""""""""""""""""""""""""
 " Tagbar setting
@@ -119,12 +122,8 @@ nmap <F4> :TagbarToggle<CR>
 " Ctrlp setting
 """"""""""""""""""""""""""""""
 nnoremap <silent> <leader>h :CtrlPMRU<cr>
-nnoremap <silent> <leader>p :CtrlP<cr>
-
-""""""""""""""""""""""""""""""
-" YandRing setting
-""""""""""""""""""""""""""""""
-nnoremap <silent> <F9> :YRShow<CR>
+"nnoremap <silent> <leader>p :CtrlP<cr>
+let g:ctrlp_map = '<Leader>p'
 
 """"""""""""""""""""""""""""""
 " easy-align setting
@@ -134,20 +133,68 @@ vmap <Enter> <Plug>(EasyAlign)
 nnoremap <Leader>a <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""
+" vim-markdown setting
+""""""""""""""""""""""""""""""
+let g:vim_markdown_folding_disabled=1
+
+""""""""""""""""""""""""""""""
 " neocomplcache setting
 """"""""""""""""""""""""""""""
 
-let g:acp_enableAtStartup             = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1 "最好关闭，要不提示太频繁
+let g:acp_enableAtStartup              = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 2
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-g>     neocomplete#undo_completion()
 
-inoremap <expr><space>  pumvisible() ? neocomplcache#close_popup() . "\<SPACE>" : "\<SPACE>"
+" Cache when buffer opend
+autocmd BufReadPost,BufEnter,BufWritePost :neocompleteCachingBuffer <buffer>
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ neocomplete#start_manual_complete()
+function! s:check_back_space() "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+""""""""""""""""""""""""""""""
+" VimShell setting
+""""""""""""""""""""""""""""""
+nmap <F5> <esc>:VimShellTab<CR>
+let g:vimshell_enable_smart_case = 1
+if has('win32') || has('win64')
+  " Display user name on Windows.
+  let g:vimshell_prompt = $USERNAME."% "
+else
+  " Display user name on Linux.
+  let g:vimshell_prompt = $USER."% "
+endif
+
+let g:ConqueTerm_ExecFileKey = 0
+let g:ConqueTerm_SendFileKey = 0
+let g:ConqueTerm_SendVisKey = 0
+
+""""""""""""""""""""""""""""""
+" Ultisinps setting
+""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<C-CR>"
+let g:UltiSnipsJumpForwardTrigger="<C-n>"
+let g:UltiSnipsJumpBackwardTrigger="<C-p>"
 
 """"""""""""""""""""""""""""""
 " python setting
@@ -164,13 +211,11 @@ set foldlevel=99
 
 let python_space_error_highlight=1
 
-map <F5> <Esc>:w<CR>:! python %<CR>
-
 """"""""""""""""""""""""""""""
 " Ruby setting
 """"""""""""""""""""""""""""""
 
-map <F6> <Esc>:w<CR>:! ruby %<CR>
+"map <F6> <Esc>:w<CR>:! ruby %<CR>
 
 """"""""""""""""""""""""""""""
 " NerdTree setting
