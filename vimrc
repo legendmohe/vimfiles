@@ -20,8 +20,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/TaskList.vim'
-"Bundle 'Shougo/neocomplcache.vim'
-Bundle 'Shougo/neocomplete.vim'
+Bundle 'Shougo/neocomplcache.vim'
+" Bundle 'Shougo/neocomplete.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
@@ -29,17 +29,13 @@ Bundle 'tpope/vim-repeat'
 Bundle 'SirVer/ultisnips'
 Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Shougo/vimshell.vim'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
-"Bundle 'YankRing.vim'
-Bundle 'EasyGrep'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'nanotech/jellybeans.vim'
-Bundle 'legendmohe/conque_2.3_fix'
 
 filetype plugin indent on    " required!
 
@@ -111,7 +107,7 @@ else
     let g:solarized_termtrans = 1
 endif
 let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme jellybeans
 
 """"""""""""""""""""""""""""""
 " Tagbar setting
@@ -140,54 +136,20 @@ let g:vim_markdown_folding_disabled=1
 """"""""""""""""""""""""""""""
 " neocomplcache setting
 """"""""""""""""""""""""""""""
-
 let g:acp_enableAtStartup              = 0
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplcache_min_syntax_length = 3
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-g>     neocomplete#undo_completion()
-
-" Cache when buffer opend
-autocmd BufReadPost,BufEnter,BufWritePost :neocompleteCachingBuffer <buffer>
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ neocomplete#start_manual_complete()
-function! s:check_back_space() "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-
-""""""""""""""""""""""""""""""
-" VimShell setting
-""""""""""""""""""""""""""""""
-nmap <F5> <esc>:VimShellTab<CR>
-let g:vimshell_enable_smart_case = 1
-if has('win32') || has('win64')
-  " Display user name on Windows.
-  let g:vimshell_prompt = $USERNAME."% "
-else
-  " Display user name on Linux.
-  let g:vimshell_prompt = $USER."% "
-endif
-
-let g:ConqueTerm_ExecFileKey = 0
-let g:ConqueTerm_SendFileKey = 0
-let g:ConqueTerm_SendVisKey = 0
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 """"""""""""""""""""""""""""""
 " Ultisinps setting
@@ -215,7 +177,7 @@ let python_space_error_highlight=1
 " Ruby setting
 """"""""""""""""""""""""""""""
 
-"map <F6> <Esc>:w<CR>:! ruby %<CR>
+map <F5> <Esc>:w<CR>:!start cmd<CR>
 
 """"""""""""""""""""""""""""""
 " NerdTree setting
@@ -234,8 +196,11 @@ map <F3> <plug>NERDTreeTabsToggle<CR>
 """"""""""""""""""""""""""""""
 " Syntastic setting
 """"""""""""""""""""""""""""""
+let g:syntastic_enable_highlighting=0
 let g:syntastic_check_on_open=1
-
+let g:syntastic_mode_map = { 'mode': 'passive',
+                               \ 'active_filetypes': ['ruby', 'python'],
+                               \ 'passive_filetypes': [] }
 """"""""""""""""""""""""""""""
 " Task List setting
 """"""""""""""""""""""""""""""
