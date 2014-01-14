@@ -35,7 +35,7 @@ Bundle 'terryma/vim-expand-region'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'nanotech/jellybeans.vim'
+" Bundle 'nanotech/jellybeans.vim'
 
 filetype plugin indent on    " required!
 
@@ -107,7 +107,7 @@ else
     let g:solarized_termtrans = 1
 endif
 let g:solarized_termcolors=256
-colorscheme jellybeans
+colorscheme solarized
 
 """"""""""""""""""""""""""""""
 " Tagbar setting
@@ -144,8 +144,7 @@ let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space><Space>"
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " <TAB>: completion.
