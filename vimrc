@@ -144,7 +144,7 @@ let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
 " Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space><Space>"
+"  inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space><Space>"
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " <TAB>: completion.
