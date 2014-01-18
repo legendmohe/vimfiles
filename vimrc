@@ -43,6 +43,7 @@ filetype plugin indent on    " required!
 " common setting
 """"""""""""""""""""""""""""""
 set ff=unix
+set colorcolumn=80
 set nocompatible
 set smartindent
 set ignorecase smartcase
@@ -143,6 +144,9 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
+" disable while moving cursor
+let g:neocomplcache_enable_cursor_hold_i = 1
+
 " Close popup by <Space>.
 "  inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space><Space>"
 inoremap <expr><C-g>     neocomplcache#undo_completion()
@@ -175,8 +179,12 @@ let python_space_error_highlight=1
 """"""""""""""""""""""""""""""
 " Ruby setting
 """"""""""""""""""""""""""""""
+if has('win32') || has('win64')
+    map <F5> <Esc>:w<CR>:silent !start cmd<CR>
+else
+    execute "map <F5> <Esc>:w<CR>:silent !open -a Terminal " . expand('%:p:h')  ."<CR>"
+endif
 
-map <F5> <Esc>:w<CR>:!start cmd<CR>
 
 """"""""""""""""""""""""""""""
 " NerdTree setting
