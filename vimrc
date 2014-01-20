@@ -36,6 +36,7 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
 " Bundle 'nanotech/jellybeans.vim'
+Bundle 'Raimondi/delimitMate'
 
 filetype plugin indent on    " required!
 
