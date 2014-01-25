@@ -115,6 +115,7 @@ colorscheme solarized
 " Tagbar setting
 """"""""""""""""""""""""""""""
 nmap <F4> :TagbarToggle<CR>
+let g:tagbar_left = 1
 
 """"""""""""""""""""""""""""""
 " Ctrlp setting
