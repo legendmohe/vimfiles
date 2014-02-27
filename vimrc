@@ -37,16 +37,16 @@ Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
 " Bundle 'nanotech/jellybeans.vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'nvie/vim-flake8'
+" Bundle 'nvie/vim-flake8'
 
 filetype plugin indent on    " required!
 
 """"""""""""""""""""""""""""""
 " common setting
 """"""""""""""""""""""""""""""
+set nocompatible
 set ff=unix
 set colorcolumn=80
-set nocompatible
 set smartindent
 set ignorecase smartcase
 set ruler
