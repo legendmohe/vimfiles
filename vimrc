@@ -2,7 +2,6 @@
 " vundle setting
 """"""""""""""""""""""""""""""
 filetype off        " required!
-
 if has('win32') || has('win64')
   set rtp+=$HOME/vimfiles/vundle/
   call vundle#rc('$HOME/vimfiles/bundle/')
@@ -154,6 +153,11 @@ inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+if has("autocmd")
+    autocmd InsertEnter * NeoComplCacheCachingBuffer
+    autocmd InsertLeave * NeoComplCacheCachingBuffer
+endif
 
 """"""""""""""""""""""""""""""
 " Ultisinps setting
