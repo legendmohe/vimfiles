@@ -154,11 +154,6 @@ inoremap <expr><C-g>     neocomplcache#undo_completion()
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-if has("autocmd")
-    autocmd InsertEnter * NeoComplCacheCachingBuffer
-    autocmd InsertLeave * NeoComplCacheCachingBuffer
-endif
-
 """"""""""""""""""""""""""""""
 " Ultisinps setting
 """"""""""""""""""""""""""""""
