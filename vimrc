@@ -44,7 +44,7 @@ filetype plugin indent on    " required!
 " common setting
 """"""""""""""""""""""""""""""
 set nocompatible
-set ff=unix
+" set ff=unix
 set colorcolumn=80
 set smartindent
 set ignorecase smartcase
@@ -56,6 +56,7 @@ set number
 set incsearch
 set nobackup
 set noshowmode
+set ffs=unix,dos
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
 
@@ -130,6 +131,19 @@ let g:ctrlp_map = '<Leader>p'
 " vip<Enter>=
 vmap <Enter> <Plug>(EasyAlign)
 nnoremap <Leader>a <Plug>(EasyAlign)
+""""""""""""""""""""""""""""""
+" easymotion
+""""""""""""""""""""""""""""""
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+"
+" " These `n` & `N` mappings are options. You do not have to map `n` & `N` to
+" EasyMotion.
+" " Without these mappings, `n` & `N` works fine. (These mappings just provide
+" " different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
 """"""""""""""""""""""""""""""
 " vim-markdown setting
