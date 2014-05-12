@@ -73,6 +73,10 @@ map <F2> :bn!<cr>
 nnoremap <leader>=  :tabnext<CR>
 nnoremap <leader>-  :tabprev<CR>
 
+"quickfix
+nnoremap <F9> :cp!<cr>
+nnoremap <F10> :cn!<cr>
+
 "搜索时把当前结果置于屏幕中央并打开折叠
 nnoremap n nzzzv
 nnoremap N Nzzzv
