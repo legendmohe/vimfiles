@@ -104,7 +104,8 @@ endif
 set t_Co=256
 syntax enable
 if has('gui_running')
-    set background=light
+    " set background=light
+    set background=dark
 else
     set background=dark
     let g:solarized_termtrans = 1
