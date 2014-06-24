@@ -38,6 +38,7 @@ Bundle 'plasticboy/vim-markdown'
 " Bundle 'nanotech/jellybeans.vim'
 Bundle 'Raimondi/delimitMate'
 " Bundle 'nvie/vim-flake8'
+Bundle 'antoyo/vim-licenses'
 
 filetype plugin indent on    " required!
 
@@ -118,6 +119,10 @@ endif
 let g:solarized_termcolors=256
 colorscheme solarized
 
+""""""""""""""""""""""""""""""
+" License setting
+""""""""""""""""""""""""""""""
+let g:licenses_authors_name = 'Xinyu, He <legendmohe@foxmail.com>'
 """"""""""""""""""""""""""""""
 " Tagbar setting
 """"""""""""""""""""""""""""""
