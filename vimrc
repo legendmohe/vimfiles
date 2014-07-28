@@ -49,6 +49,7 @@ set nocompatible
 " set ff=unix
 set colorcolumn=80
 set smartindent
+set cursorline 
 set ignorecase smartcase
 set ruler
 " set autochdir
