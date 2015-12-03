@@ -19,8 +19,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/TaskList.vim'
-Bundle 'Shougo/neocomplcache.vim'
-" Bundle 'Shougo/neocomplete.vim'
+" Bundle 'Shougo/neocomplcache.vim'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
@@ -165,20 +165,38 @@ let g:vim_markdown_folding_disabled=1
 """"""""""""""""""""""""""""""
 " neocomplcache setting
 """"""""""""""""""""""""""""""
-let g:acp_enableAtStartup              = 0
+"let g:acp_enableAtStartup              = 0
 " Use neocomplete.
-let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_min_syntax_length = 3
 
 " Close popup by <Space>.
 "  inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space><Space>"
-inoremap <expr><C-g>     neocomplcache#undo_completion()
+"inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+""""""""""""""""""""""""""""""
+" neocomplete setting
+""""""""""""""""""""""""""""""
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+
+" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 """"""""""""""""""""""""""""""
 " Ultisinps setting
