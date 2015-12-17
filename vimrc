@@ -97,6 +97,19 @@ autocmd BufEnter * silent! lcd %:p:h
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
+" Relative numbering
+function NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+    set number
+  else
+    set rnu
+  endif
+endfunction
+
+" Toggle between normal and relative numbering.
+nnoremap <leader>r :call NumberToggle()<cr>
+
 """"""""""""""""""""""""""""""
 " color and fonts setting
 """"""""""""""""""""""""""""""
