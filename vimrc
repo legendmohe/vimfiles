@@ -31,7 +31,7 @@ Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'terryma/vim-expand-region'
+" Bundle 'terryma/vim-expand-region'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'plasticboy/vim-markdown'
@@ -39,6 +39,7 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'Raimondi/delimitMate'
 " Bundle 'nvie/vim-flake8'
 Bundle 'antoyo/vim-licenses'
+Bundle 'kshenoy/vim-signature'
 
 filetype plugin indent on    " required!
 
