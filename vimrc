@@ -57,7 +57,7 @@ set ruler
 set number
 "filetype plugin on "允许插件
 "set hlsearch
-set incsearch
+"set incsearch
 set nobackup
 set noshowmode
 set ffs=unix,dos
@@ -66,6 +66,14 @@ set go=
 
 "Set mapleader
 let mapleader = ","
+
+set incsearch
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
+
+inoremap <C-U> <C-G>u<C-U>
 
 set imactivatekey=C-space
 inoremap <ESC> <ESC>:set iminsert=2<CR>
