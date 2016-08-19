@@ -19,7 +19,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/TaskList.vim'
-" Bundle 'Shougo/neocomplcache.vim'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
@@ -40,6 +39,8 @@ Bundle 'Raimondi/delimitMate'
 " Bundle 'nvie/vim-flake8'
 Bundle 'antoyo/vim-licenses'
 Bundle 'kshenoy/vim-signature'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 
 filetype plugin indent on    " required!
 
@@ -291,7 +292,7 @@ set tags+=tags;
 set laststatus=2
 let g:airline_detect_whitespace          = 0 "关闭空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
-let g:airline_theme                      = "bubblegum" "设定主题
+" let g:airline_theme                      = "bubblegum" "设定主题
 
 """"""""""""""""""""""""""""""
 " others setting
