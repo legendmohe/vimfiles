@@ -8,39 +8,31 @@ if has('win32') || has('win64')
 else
   " Usual quickstart instructions
   set rtp+=~/.vim/vundle/
+
+  " for fzf
+  set rtp+=~/.fzf
+
   call vundle#rc()
 endif
 
-Bundle 'Shougo/vimproc.vim'
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
 Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-surround'
-Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/TaskList.vim'
-Bundle 'Shougo/neocomplete.vim'
+Bundle 'dyng/ctrlsf.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
 Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'terryma/vim-multiple-cursors'
-" Bundle 'terryma/vim-expand-region'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
-Bundle 'plasticboy/vim-markdown'
-" Bundle 'nanotech/jellybeans.vim'
 Bundle 'Raimondi/delimitMate'
-" Bundle 'nvie/vim-flake8'
-Bundle 'antoyo/vim-licenses'
-Bundle 'kshenoy/vim-signature'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
+Bundle 'junegunn/fzf.vim'
 
 filetype plugin indent on    " required!
 
@@ -64,6 +56,7 @@ set noshowmode
 set ffs=unix,dos
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
+set backspace=indent,eol,start " more powerful backspacing    
 
 "Set mapleader
 let mapleader = ","
@@ -102,7 +95,7 @@ nmap <silent> <leader>ss :source $MYVIMRC<cr>
 "Fast editing of .vimrc
 nmap <silent> <leader>ee :e $MYVIMRC<cr>
 "When .vimrc is edited, reload it
-autocmd BufEnter * silent! lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -124,11 +117,11 @@ nnoremap <leader>r :call NumberToggle()<cr>
 " color and fonts setting
 """"""""""""""""""""""""""""""
 "Font
-if has('win32') || has('win64')
-    set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
-else
-    set guifont=Monaco:h12 
-endif
+" if has('win32') || has('win64')
+"     set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
+" else
+"     " set guifont=  :h14 
+" endif
 "
 "colo
 set t_Co=256
@@ -186,42 +179,6 @@ map  N <Plug>(easymotion-prev)
 let g:vim_markdown_folding_disabled=1
 
 """"""""""""""""""""""""""""""
-" neocomplcache setting
-""""""""""""""""""""""""""""""
-"let g:acp_enableAtStartup              = 0
-" Use neocomplete.
-"let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-"let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-"let g:neocomplcache_min_syntax_length = 3
-
-" Close popup by <Space>.
-"  inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space><Space>"
-"inoremap <expr><C-g>     neocomplcache#undo_completion()
-
-" <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-""""""""""""""""""""""""""""""
-" neocomplete setting
-""""""""""""""""""""""""""""""
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-
-" <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-""""""""""""""""""""""""""""""
 " Ultisinps setting
 """"""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<C-k>"
@@ -242,16 +199,6 @@ set foldmethod=indent " fold
 set foldlevel=99
 
 let python_space_error_highlight=1
-
-""""""""""""""""""""""""""""""
-" Ruby setting
-""""""""""""""""""""""""""""""
-if has('win32') || has('win64')
-    map <F5> <Esc>:w<CR>:silent !start cmd<CR>
-else
-    execute "map <F5> <Esc>:w<CR>:silent !open -a Terminal " . expand('%:p:h')  ."<CR>"
-endif
-
 
 """"""""""""""""""""""""""""""
 " NerdTree setting
@@ -293,6 +240,17 @@ set laststatus=2
 let g:airline_detect_whitespace          = 0 "关闭空白符检测
 let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
 " let g:airline_theme                      = "bubblegum" "设定主题
+
+""""""""""""""""""""""""""""""
+" ctrlsf setting
+""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>f :CtrlSF <space>
+let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
+
+""""""""""""""""""""""""""""""
+" fzf setting
+""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>p :Files<CR>
 
 """"""""""""""""""""""""""""""
 " others setting
