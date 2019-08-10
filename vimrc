@@ -33,6 +33,7 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'Raimondi/delimitMate'
 Bundle 'junegunn/fzf.vim'
+Bundle 'airblade/vim-gitgutter'
 
 filetype plugin indent on    " required!
 
