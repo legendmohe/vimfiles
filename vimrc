@@ -2,6 +2,20 @@
 " vundle setting
 """"""""""""""""""""""""""""""
 filetype off        " required!
+
+" directwrite
+if has('win32') || has('win64')
+    if has("gui_running")
+        set guioptions=icpM
+        if has('win32') || has('win64')
+            if (v:version == 704 && has("patch393")) || v:version > 704
+                set renderoptions=type:directx,level:0.75,gamma:1.25,contrast:0.25,
+                            \geom:1,renmode:5,taamode:1
+            endif
+        endif
+    endif
+endif
+
 if has('win32') || has('win64')
   set rtp+=$HOME/vimfiles/vundle/
   call vundle#rc('$HOME/vimfiles/bundle/')
@@ -58,6 +72,7 @@ set ffs=unix,dos
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
 set backspace=indent,eol,start " more powerful backspacing    
+set nowrap 
 
 "Set mapleader
 let mapleader = ","
@@ -118,12 +133,12 @@ nnoremap <leader>r :call NumberToggle()<cr>
 " color and fonts setting
 """"""""""""""""""""""""""""""
 "Font
-" if has('win32') || has('win64')
-"     set guifont=Bitstream_Vera_Sans_Mono:h10.5:cANSI
-" else
-"     " set guifont=  :h14 
-" endif
-"
+if has('win32') || has('win64')
+    set guifont=Consolas:h11,Microsoft\ Yahei:h11:cANSI
+else
+    " set guifont=:h11
+endif
+
 "colo
 set t_Co=256
 syntax enable
