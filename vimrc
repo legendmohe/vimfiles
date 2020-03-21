@@ -38,7 +38,6 @@ Bundle 'dyng/ctrlsf.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-repeat'
-Bundle 'SirVer/ultisnips'
 Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'jistr/vim-nerdtree-tabs'
@@ -46,6 +45,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'Raimondi/delimitMate'
+Bundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Bundle 'junegunn/fzf.vim'
 Bundle 'airblade/vim-gitgutter'
 
@@ -193,13 +193,6 @@ map  N <Plug>(easymotion-prev)
 " vim-markdown setting
 """"""""""""""""""""""""""""""
 let g:vim_markdown_folding_disabled=1
-
-""""""""""""""""""""""""""""""
-" Ultisinps setting
-""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<C-n>"
-let g:UltiSnipsJumpBackwardTrigger="<C-p>"
 
 """"""""""""""""""""""""""""""
 " python setting
