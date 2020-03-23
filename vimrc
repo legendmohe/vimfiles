@@ -41,13 +41,14 @@ Bundle 'tpope/vim-repeat'
 Bundle 'mhinz/vim-startify'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'terryma/vim-multiple-cursors'
+Bundle 'mg979/vim-visual-multi'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'Raimondi/delimitMate'
 Bundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Bundle 'junegunn/fzf.vim'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'udalov/kotlin-vim'
 
 filetype plugin indent on    " required!
 
@@ -161,14 +162,6 @@ let g:licenses_authors_name = 'Xinyu, He <legendmohe@foxmail.com>'
 """"""""""""""""""""""""""""""
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_left = 1
-
-""""""""""""""""""""""""""""""
-" Ctrlp setting
-""""""""""""""""""""""""""""""
-nnoremap <silent> <leader>h :CtrlPMRU<cr>
-"nnoremap <silent> <leader>p :CtrlP<cr>
-let g:ctrlp_map = '<Leader>p'
-
 """"""""""""""""""""""""""""""
 " easy-align setting
 """"""""""""""""""""""""""""""
@@ -219,9 +212,6 @@ let NERDTreeHighlightCursorline = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 map <F3> <plug>NERDTreeTabsToggle<CR>
-""""""""""""""""""""""""""""""
-" vim-multiple-cursors setting
-""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " Syntastic setting
@@ -261,6 +251,12 @@ let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 " fzf setting
 """"""""""""""""""""""""""""""
 nnoremap <silent> <leader>p :Files<CR>
+
+""""""""""""""""""""""""""""""
+" gitgutter setting
+""""""""""""""""""""""""""""""
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
 
 """"""""""""""""""""""""""""""
 " others setting
