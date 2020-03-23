@@ -253,7 +253,8 @@ let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
 """"""""""""""""""""""""""""""
 " ctrlsf setting
 """"""""""""""""""""""""""""""
-nnoremap <silent> <leader>f :CtrlSF <space>
+nmap <leader>f :CtrlSF <space>
+vmap <leader>f <Plug>CtrlSFVwordExec
 let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 
 """"""""""""""""""""""""""""""
