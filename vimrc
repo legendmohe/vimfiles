@@ -29,26 +29,39 @@ else
   call vundle#rc()
 endif
 
-Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/TaskList.vim'
-Bundle 'dyng/ctrlsf.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-repeat'
-Bundle 'mhinz/vim-startify'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'mg979/vim-visual-multi'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'junegunn/vim-easy-align'
-Bundle 'Raimondi/delimitMate'
-Bundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Bundle 'junegunn/fzf.vim'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'udalov/kotlin-vim'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-scripts/TaskList.vim'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-repeat'
+Plugin 'mhinz/vim-startify'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'mg979/vim-visual-multi'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'Raimondi/delimitMate'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'udalov/kotlin-vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'romainl/Apprentice'
+Plugin 'Yggdroot/indentLine'
+Plugin 'airblade/vim-rooter'
+
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 filetype plugin indent on    " required!
 
@@ -75,6 +88,10 @@ set go=
 set backspace=indent,eol,start " more powerful backspacing    
 set nowrap 
 
+if has('win32') || has('win64')
+    set shell=pwsh.exe
+endif
+
 "Set mapleader
 let mapleader = ","
 
@@ -93,8 +110,11 @@ inoremap <ESC> <ESC>:set iminsert=2<CR>
 map <F1> :bp!<cr>
 map <F2> :bn!<cr>
 "switch tabs
-nnoremap <leader>=  :tabnext<CR>
-nnoremap <leader>-  :tabprev<CR>
+nnoremap <leader>=  :tabnext<cr>
+nnoremap <leader>-  :tabprev<cr>
+
+nnoremap <leader>]  :bnext<cr>
+nnoremap <leader>[  :bprevious<cr>
 
 "quickfix
 nnoremap <F9> :cp!<cr>
@@ -141,17 +161,15 @@ else
 endif
 
 "colo
-set t_Co=256
 syntax enable
-if has('gui_running')
-    " set background=light
-    set background=dark
-else
-    set background=dark
-    let g:solarized_termtrans = 1
+set termguicolors
+
+set background=dark
+colorscheme apprentice
+
+if &diff
+    colorscheme murphy
 endif
-let g:solarized_termcolors=256
-colorscheme solarized
 
 """"""""""""""""""""""""""""""
 " License setting
@@ -205,13 +223,16 @@ let python_space_error_highlight=1
 """"""""""""""""""""""""""""""
 " NerdTree setting
 """"""""""""""""""""""""""""""
-let NERDTreeChDirMode=2
+" let NERDTreeChDirMode=1
 let NERDTreeWinPos="right"
 let NERDTreeShowBookmarks=1
 let NERDTreeHighlightCursorline = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 map <F3> <plug>NERDTreeTabsToggle<CR>
+map <S-F3> :NERDTreeFind<cr>
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """"""""""""""""""""""""""""""
 " Syntastic setting
@@ -231,6 +252,11 @@ map <leader>td <Plug>TaskList
 """"""""""""""""""""""""""""""
 
 set tags+=tags;
+
+""""""""""""""""""""""""""""""
+" vim-rooter setting
+""""""""""""""""""""""""""""""
+
 
 """"""""""""""""""""""""""""""
 " airline setting
