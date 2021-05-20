@@ -30,7 +30,7 @@ else
 endif
 
 Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
+" Plugin 'bling/vim-bufferline'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-scripts/TaskList.vim'
@@ -47,27 +47,22 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'Raimondi/delimitMate'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 Plugin 'udalov/kotlin-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'romainl/Apprentice'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
-
-if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'doums/darcula'
 
 filetype plugin indent on    " required!
 
 """"""""""""""""""""""""""""""
 " common setting
 """"""""""""""""""""""""""""""
+set cmdheight=2
+set shortmess=a
 set nocompatible
 " set ff=unix
 set colorcolumn=80
@@ -88,9 +83,9 @@ set go=
 set backspace=indent,eol,start " more powerful backspacing    
 set nowrap 
 
-if has('win32') || has('win64')
-    set shell=pwsh.exe
-endif
+" if has('win32') || has('win64')
+"     set shell=pwsh.exe
+" endif
 
 "Set mapleader
 let mapleader = ","
@@ -165,7 +160,7 @@ syntax enable
 set termguicolors
 
 set background=dark
-colorscheme apprentice
+colorscheme darcula
 
 if &diff
     colorscheme murphy
@@ -277,6 +272,8 @@ let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 " fzf setting
 """"""""""""""""""""""""""""""
 nnoremap <silent> <leader>p :Files<CR>
+let g:fzf_preview_window = []
+let g:fzf_layout = { 'down': '40%' }
 
 """"""""""""""""""""""""""""""
 " gitgutter setting
@@ -326,3 +323,8 @@ function! MyDiff()
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
+
+" Cursor in terminal
+let &t_SI.="\e[5 q"
+let &t_SR.="\e[4 q"
+let &t_EI.="\e[1 q"
