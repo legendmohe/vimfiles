@@ -25,6 +25,7 @@ else
 
   " for fzf
   set rtp+=~/.fzf
+  set rtp+=/opt/homebrew/opt/fzf
 
   call vundle#rc()
 endif
@@ -53,8 +54,9 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'romainl/Apprentice'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
-Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'ycm-core/YouCompleteMe'
 Plugin 'doums/darcula'
+Plugin 'matze/vim-move'
 
 filetype plugin indent on    " required!
 
@@ -160,7 +162,10 @@ syntax enable
 set termguicolors
 
 set background=dark
-colorscheme darcula
+
+if has('win32') || has('win64')
+    colorscheme darcula
+endif
 
 if &diff
     colorscheme murphy
@@ -280,6 +285,11 @@ let g:fzf_layout = { 'down': '40%' }
 """"""""""""""""""""""""""""""
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
+
+""""""""""""""""""""""""""""""
+" vim-move setting
+""""""""""""""""""""""""""""""
+let g:move_key_modifier = 'C'
 
 """"""""""""""""""""""""""""""
 " others setting
