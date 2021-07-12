@@ -57,6 +57,10 @@ Plugin 'airblade/vim-rooter'
 " Plugin 'ycm-core/YouCompleteMe'
 Plugin 'doums/darcula'
 Plugin 'matze/vim-move'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'chaoren/vim-wordmotion'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'rhysd/clever-f.vim'
 
 filetype plugin indent on    " required!
 
@@ -162,6 +166,7 @@ syntax enable
 set termguicolors
 
 set background=dark
+colorscheme palenight
 
 if has('win32') || has('win64')
     colorscheme darcula
