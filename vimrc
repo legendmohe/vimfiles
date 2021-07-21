@@ -58,9 +58,10 @@ Plugin 'airblade/vim-rooter'
 Plugin 'doums/darcula'
 Plugin 'matze/vim-move'
 Plugin 'fholgado/minibufexpl.vim'
-Plugin 'chaoren/vim-wordmotion'
+" Plugin 'chaoren/vim-wordmotion'
 Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'rhysd/clever-f.vim'
+Plugin 'psliwka/vim-smoothie'
 
 filetype plugin indent on    " required!
 
@@ -94,7 +95,9 @@ set nowrap
 " endif
 
 "Set mapleader
-let mapleader = ","
+" let mapleader = ","
+let mapleader=" "
+nnoremap <Space> <Nop>
 
 set incsearch
 " Use <C-L> to clear the highlighting of :set hlsearch.
@@ -268,7 +271,7 @@ set tags+=tags;
 """"""""""""""""""""""""""""""
 set laststatus=2
 let g:airline_detect_whitespace          = 0 "关闭空白符检测
-let g:airline#extensions#tabline#enabled = 1 "顶部tab栏显示
+let g:airline#extensions#tabline#enabled = 0 "顶部tab栏显示
 " let g:airline_theme                      = "bubblegum" "设定主题
 
 """"""""""""""""""""""""""""""
@@ -282,6 +285,9 @@ let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 " fzf setting
 """"""""""""""""""""""""""""""
 nnoremap <silent> <leader>p :Files<CR>
+vnoremap <silent> <leader>p <Esc>:FZF -q <C-R>=<SID>getVisualSelection()<CR><CR>
+nnoremap <silent> <leader><leader>p :FZF -q <C-R>=expand("<cword>")<CR><CR>
+
 let g:fzf_preview_window = []
 let g:fzf_layout = { 'down': '40%' }
 
@@ -343,3 +349,18 @@ endfunction
 let &t_SI.="\e[5 q"
 let &t_SR.="\e[4 q"
 let &t_EI.="\e[1 q"
+
+function! s:getVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+
+    if len(lines) == 0
+        return ""
+    endif
+
+    let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+
+    return join(lines, "\n")
+endfunction
