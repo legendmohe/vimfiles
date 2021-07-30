@@ -60,6 +60,7 @@ Plugin 'matze/vim-move'
 Plugin 'fholgado/minibufexpl.vim'
 " Plugin 'chaoren/vim-wordmotion'
 Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'liuchengxu/space-vim-dark'
 Plugin 'rhysd/clever-f.vim'
 Plugin 'psliwka/vim-smoothie'
 
@@ -74,7 +75,7 @@ set nocompatible
 " set ff=unix
 set colorcolumn=80
 set smartindent
-set cursorline 
+" set cursorline 
 set ignorecase smartcase
 set ruler
 " set autochdir
@@ -171,13 +172,13 @@ set termguicolors
 set background=dark
 colorscheme palenight
 
-if has('win32') || has('win64')
-    colorscheme darcula
-endif
-
-if &diff
-    colorscheme murphy
-endif
+" if has('win32') || has('win64')
+"     colorscheme darcula
+" endif
+"
+" if &diff
+"     colorscheme murphy
+" endif
 
 """"""""""""""""""""""""""""""
 " License setting
@@ -345,10 +346,12 @@ function! MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-" Cursor in terminal
-let &t_SI.="\e[5 q"
-let &t_SR.="\e[4 q"
-let &t_EI.="\e[1 q"
+if has("gui_running")
+    " Cursor in terminal
+    let &t_SI.="\e[5 q"
+    let &t_SR.="\e[4 q"
+    let &t_EI.="\e[1 q"
+endif
 
 function! s:getVisualSelection()
     let [line_start, column_start] = getpos("'<")[1:2]
