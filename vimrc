@@ -16,53 +16,47 @@ if has('win32') || has('win64')
     endif
 endif
 
-if has('win32') || has('win64')
-  set rtp+=$HOME/vimfiles/vundle/
-  call vundle#rc('$HOME/vimfiles/bundle/')
-else
-  " Usual quickstart instructions
-  set rtp+=~/.vim/vundle/
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-  " for fzf
-  set rtp+=~/.fzf
-  set rtp+=/opt/homebrew/opt/fzf
+Plug 'bling/vim-airline'
+" Plug 'bling/vim-bufferline'
+Plug 'scrooloose/nerdtree'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-repeat'
+Plug 'mhinz/vim-startify'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'jistr/vim-nerdtree-tabs', { 'on':  'NERDTreeTabsToggle' }
+Plug 'mg979/vim-visual-multi'
+Plug 'tomtom/tcomment_vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'Raimondi/delimitMate'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Plug 'airblade/vim-gitgutter'
+Plug 'udalov/kotlin-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'romainl/Apprentice'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-rooter'
+" Plug 'ycm-core/YouCompleteMe'
+Plug 'doums/darcula'
+Plug 'matze/vim-move'
+Plug 'fholgado/minibufexpl.vim'
+" Plug 'chaoren/vim-wordmotion'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'rhysd/clever-f.vim'
+Plug 'psliwka/vim-smoothie'
 
-  call vundle#rc()
-endif
-
-Plugin 'bling/vim-airline'
-" Plugin 'bling/vim-bufferline'
-Plugin 'scrooloose/nerdtree'
-" Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-scripts/TaskList.vim'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-repeat'
-Plugin 'mhinz/vim-startify'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'mg979/vim-visual-multi'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'Raimondi/delimitMate'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-" Plugin 'airblade/vim-gitgutter'
-Plugin 'udalov/kotlin-vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'romainl/Apprentice'
-Plugin 'Yggdroot/indentLine'
-Plugin 'airblade/vim-rooter'
-" Plugin 'ycm-core/YouCompleteMe'
-Plugin 'doums/darcula'
-Plugin 'matze/vim-move'
-Plugin 'fholgado/minibufexpl.vim'
-" Plugin 'chaoren/vim-wordmotion'
-Plugin 'drewtempelmeyer/palenight.vim'
-Plugin 'liuchengxu/space-vim-dark'
-Plugin 'rhysd/clever-f.vim'
-Plugin 'psliwka/vim-smoothie'
+" Initialize plugin system
+call plug#end()
 
 filetype plugin indent on    " required!
 
@@ -90,6 +84,7 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set go=
 set backspace=indent,eol,start " more powerful backspacing    
 set nowrap 
+set lazyredraw
 
 " if has('win32') || has('win64')
 "     set shell=pwsh.exe
@@ -352,18 +347,25 @@ if has("gui_running")
     let &t_SR.="\e[4 q"
     let &t_EI.="\e[1 q"
 endif
-
-function! s:getVisualSelection()
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-
-    if len(lines) == 0
-        return ""
-    endif
-
-    let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-
-    return join(lines, "\n")
-endfunction
+" Set cursor shape and color
+" " 1 -> blinking block  闪烁的方块
+" " 2 -> solid block  不闪烁的方块
+" " 3 -> blinking underscore  闪烁的下划线
+" " 4 -> solid underscore  不闪烁的下划线
+" " 5 -> blinking vertical bar  闪烁的竖线
+" " 6 -> solid vertical bar  不闪烁的竖线
+"
+" function! s:getVisualSelection()
+"     let [line_start, column_start] = getpos("'<")[1:2]
+"     let [line_end, column_end] = getpos("'>")[1:2]
+"     let lines = getline(line_start, line_end)
+"
+"     if len(lines) == 0
+"         return ""
+"     endif
+"
+"     let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
+"     let lines[0] = lines[0][column_start - 1:]
+"
+"     return join(lines, "\n")
+" endfunction
