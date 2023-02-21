@@ -20,18 +20,20 @@ endif
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-
 Plug 'bling/vim-airline'
+
 " Plug 'bling/vim-bufferline'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
+" Plug 'mcchrish/nnn.vim'
 " Plug 'altercation/vim-colors-solarized'
 Plug 'vim-scripts/TaskList.vim'
 Plug 'dyng/ctrlsf.vim'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
-Plug 'Lokaltog/vim-easymotion'
+" Plug 'Lokaltog/vim-easymotion'
+Plug 'monkoose/vim9-stargate'
 Plug 'jistr/vim-nerdtree-tabs', { 'on':  'NERDTreeTabsToggle' }
 Plug 'mg979/vim-visual-multi'
 Plug 'tomtom/tcomment_vim'
@@ -53,7 +55,7 @@ Plug 'fholgado/minibufexpl.vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'rhysd/clever-f.vim'
-Plug 'psliwka/vim-smoothie'
+" Plug 'psliwka/vim-smoothie'
 
 " Initialize plugin system
 call plug#end()
@@ -143,7 +145,7 @@ function NumberToggle()
     set nornu
     set number
   else
-    set rnu
+    set rnr
   endif
 endfunction
 
@@ -157,7 +159,7 @@ nnoremap <leader>r :call NumberToggle()<cr>
 if has('win32') || has('win64')
     set guifont=Consolas:h11,Microsoft\ Yahei:h11:cANSI
 else
-    " set guifont=:h11
+    set guifont=:h11
 endif
 
 "colo
@@ -191,18 +193,12 @@ let g:tagbar_left = 1
 vmap <Enter> <Plug>(EasyAlign)
 nnoremap <Leader>a <Plug>(EasyAlign)
 """"""""""""""""""""""""""""""
-" easymotion
+" vim9-stargate
 """"""""""""""""""""""""""""""
-" Gif config
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-"
-" " These `n` & `N` mappings are options. You do not have to map `n` & `N` to
-" EasyMotion.
-" " Without these mappings, `n` & `N` works fine. (These mappings just provide
-" " different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" For 1 character to search before showing hints
+noremap <leader>F <Cmd>call stargate#OKvim(1)<CR>
+" For 2 consecutive characters to search
+noremap <leader>g <Cmd>call stargate#OKvim(2)<CR>
 
 """"""""""""""""""""""""""""""
 " vim-markdown setting
@@ -227,7 +223,7 @@ let python_space_error_highlight=1
 """"""""""""""""""""""""""""""
 " NerdTree setting
 """"""""""""""""""""""""""""""
-" let NERDTreeChDirMode=1
+let NERDTreeChDirMode=1
 let NERDTreeWinPos="right"
 let NERDTreeShowBookmarks=1
 let NERDTreeHighlightCursorline = 1
@@ -305,12 +301,6 @@ if has('win32') || has('win64')
     source $VIMRUNTIME/mswin.vim 
     behave mswin
 endif
-
-" insert word of the line above
-inoremap <C-Y> <C-C>:let @z = @"<CR>mz
-           \:exec 'normal!' (col('.')==1 && col('$')==1 ? 'k' : 'kl')<CR>
-           \:exec (col('.')==col('$') - 1 ? 'let @" = @_' : 'normal! yw')<CR>
-           \`zp:let @" = @z<CR>a
 
 """"""""""""""""""""""""""""""
 " defult
