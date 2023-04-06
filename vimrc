@@ -21,18 +21,12 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
-
-" Plug 'bling/vim-bufferline'
 Plug 'preservim/nerdtree'
-" Plug 'mcchrish/nnn.vim'
-" Plug 'altercation/vim-colors-solarized'
 Plug 'vim-scripts/TaskList.vim'
 Plug 'dyng/ctrlsf.vim'
-" Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
-" Plug 'Lokaltog/vim-easymotion'
 Plug 'monkoose/vim9-stargate'
 Plug 'jistr/vim-nerdtree-tabs', { 'on':  'NERDTreeTabsToggle' }
 Plug 'mg979/vim-visual-multi'
@@ -41,21 +35,17 @@ Plug 'junegunn/vim-easy-align'
 Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'airblade/vim-gitgutter'
 Plug 'udalov/kotlin-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'romainl/Apprentice'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-rooter'
-" Plug 'ycm-core/YouCompleteMe'
 Plug 'doums/darcula'
 Plug 'matze/vim-move'
 Plug 'fholgado/minibufexpl.vim'
-" Plug 'chaoren/vim-wordmotion'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'rhysd/clever-f.vim'
-" Plug 'psliwka/vim-smoothie'
 
 " Initialize plugin system
 call plug#end()
@@ -164,10 +154,13 @@ endif
 
 "colo
 syntax enable
-set termguicolors
 
 set background=dark
 colorscheme palenight
+
+if (has("termguicolors"))                                                               
+      set termguicolors                                                                     
+endif
 
 " if has('win32') || has('win64')
 "     colorscheme darcula
