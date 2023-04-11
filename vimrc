@@ -44,7 +44,6 @@ Plug 'doums/darcula'
 Plug 'matze/vim-move'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'liuchengxu/space-vim-dark'
 Plug 'rhysd/clever-f.vim'
 
 " Initialize plugin system
@@ -95,9 +94,6 @@ endif
 
 inoremap <C-U> <C-G>u<C-U>
 
-set imactivatekey=C-space
-inoremap <ESC> <ESC>:set iminsert=2<CR>
-
 "switch buffer
 map <F1> :bp!<cr>
 map <F2> :bn!<cr>
@@ -115,6 +111,9 @@ nnoremap <F10> :cn!<cr>
 "搜索时把当前结果置于屏幕中央并打开折叠
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+nnoremap <c-f> <Esc>/
+inoremap <c-f> <Esc>/
 
 "map ESC with jj
 imap jj <ESC>
@@ -141,6 +140,17 @@ endfunction
 
 " Toggle between normal and relative numbering.
 nnoremap <leader>r :call NumberToggle()<cr>
+
+""""""""""""""""""""""""""""""
+" terminal setting
+""""""""""""""""""""""""""""""
+nnoremap <a-0> :term<cr>
+inoremap <a-0> :term<cr>
+
+nmap <M-Right> :vertical resize +1<CR>
+nmap <M-Left> :vertical resize -1<CR>
+nmap <M-Down> :resize +1<CR>
+nmap <M-Up> :resize -1<CR>
 
 """"""""""""""""""""""""""""""
 " color and fonts setting
@@ -189,9 +199,11 @@ nnoremap <Leader>a <Plug>(EasyAlign)
 " vim9-stargate
 """"""""""""""""""""""""""""""
 " For 1 character to search before showing hints
-noremap <leader>F <Cmd>call stargate#OKvim(1)<CR>
-" For 2 consecutive characters to search
-noremap <leader>g <Cmd>call stargate#OKvim(2)<CR>
+
+if !has('nvim')
+    noremap <leader>f <Cmd>call stargate#OKvim(1)<CR>
+    noremap <leader>g <Cmd>call stargate#OKvim(2)<CR>
+endif
 
 """"""""""""""""""""""""""""""
 " vim-markdown setting
@@ -223,18 +235,11 @@ let NERDTreeHighlightCursorline = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 map <F3> <plug>NERDTreeTabsToggle<CR>
+map <a-1> :NERDTreeFind<CR>
 map <S-F3> :NERDTreeFind<cr>
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-""""""""""""""""""""""""""""""
-" Syntastic setting
-""""""""""""""""""""""""""""""
-let g:syntastic_enable_highlighting=0
-let g:syntastic_check_on_open=1
-let g:syntastic_mode_map = { 'mode': 'passive',
-                               \ 'active_filetypes': ['ruby', 'python'],
-                               \ 'passive_filetypes': [] }
 """"""""""""""""""""""""""""""
 " Task List setting
 """"""""""""""""""""""""""""""
@@ -262,16 +267,19 @@ let g:airline#extensions#tabline#enabled = 0 "顶部tab栏显示
 """"""""""""""""""""""""""""""
 " ctrlsf setting
 """"""""""""""""""""""""""""""
-nmap <leader>f :CtrlSF <space>
-vmap <leader>f <Plug>CtrlSFVwordExec
+nmap <leader>F <Esc>:CtrlSF <space>
+vmap <leader>F <Plug>CtrlSFVwordExec
 let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 
 """"""""""""""""""""""""""""""
 " fzf setting
 """"""""""""""""""""""""""""""
-nnoremap <silent> <leader>p :Files<CR>
+nnoremap <silent> <leader>p <Esc>:Files<CR>
 vnoremap <silent> <leader>p <Esc>:FZF -q <C-R>=<SID>getVisualSelection()<CR><CR>
-nnoremap <silent> <leader><leader>p :FZF -q <C-R>=expand("<cword>")<CR><CR>
+nnoremap <silent> <leader><leader>p <Esc>:FZF -q <C-R>=expand("<cword>")<CR><CR>
+
+nnoremap <silent> <c-e> :History<CR>
+nnoremap <silent> <c-n> <Esc>:Files<CR>
 
 let g:fzf_preview_window = []
 let g:fzf_layout = { 'down': '40%' }
